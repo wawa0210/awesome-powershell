@@ -1,4 +1,4 @@
-# powershell使用过程中的最佳实践
+# powershell使用过程中的最佳实践 [Powershell best practices]([/powershell_en.md)
 
 
 ## CPU
