@@ -1,4 +1,4 @@
-## CPU
+### CPU
 
 * Get cpu usage
 
@@ -22,7 +22,7 @@
     }
     ```
 
-## Memory
+### Memory
 
 * Get memory usage
 
