@@ -21,6 +21,19 @@
         Start-Sleep 2
     }
     ```
+* Get process cpu useage
+    ```
+    function GetCpuUsageByProcessName {
+        param (
+            [string] $processName
+        )
+        $CurrentProcessCpuUseage = (get-process $processName  | Select-Object -expand CPU | Measure-Object -Sum | Select-Object -expand Sum)/1000/4
+        $TotalCpuCore = (Get-CimInstance Win32_ComputerSystem).NumberOfLogicalProcessors
+
+        return $CurrentProcessCpuUseage / $TotalCpuCore
+    }
+
+    ```
 
 ### Memory
 
