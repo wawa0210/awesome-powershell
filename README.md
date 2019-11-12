@@ -51,13 +51,14 @@
   
   ```
   if (-not (Test-Path "c:\memory_useage.log")){
-      "" > c:\memory_useage.log
+    "" > c:\memory_useage.log
   }
   while ($true) {
-      $ComputerMemory = Get-WmiObject -ComputerName localhost -Class win32_operatingsystem -ErrorAction Stop
-      $Memory = ((($ComputerMemory.TotalVisibleMemorySize - $ComputerMemory.FreePhysicalMemory)*100)/ $ComputerMemory.TotalVisibleMemorySize)
-      $RoundMemory = [math]::Round($Memory, 2)
-      Add-Content -Path "c:\memory_useage.log" -Value ((Get-Date -Format "yyyy-mm-dd HH:mm:ss") + "|"+$RoundMemory)
-      Start-Sleep 2
+    $ComputerMemory = Get-WmiObject -ComputerName localhost -Class win32_operatingsystem -ErrorAction Stop
+    $Memory = ((($ComputerMemory.TotalVisibleMemorySize - $ComputerMemory.FreePhysicalMemory)*100)/ $ComputerMemory.TotalVisibleMemorySize)
+    $RoundMemory = [math]::Round($Memory, 2)
+    Add-Content -Path "c:\memory_useage.log" -Value ((Get-Date -Format "yyyy-mm-dd HH:mm:ss") + "|"+$RoundMemory)
+    Start-Sleep 2
   }
   ```
+  
