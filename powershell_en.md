@@ -60,18 +60,40 @@
   }
   ```
 
-### File
+### File System
 
-* Quickly create large file
+* Quickly create large file(fsutil)
   ```
   fsutil file createnew 1.log 1073741824
 
-  #Some common file sizes to save you from math
-  1 MB = 1048576 bytes
-  100 MB = 104857600 bytes
-  1 GB = 1073741824 bytes
-  10 GB = 10737418240 bytes
-  100 GB =107374182400 bytes
-  1 TB = 1099511627776 bytes
-  10 TB = 10995116277760 bytes
+  #Some common file sizes to save you from math(File size is in bytes)
+  1 MB = 1024 * 1024 bytes
+  100 MB = 100 * 1024 * 1024  bytes
+  1 GB = 1024 * 1024 * 1024 bytes
+  1 TB = 1024 * 1024 * 1024 * 1024 bytes
   ```
+
+* Quickly create large file(using powershell)
+
+  ```
+  $content = "f" * 501MB
+  $content | Out-File -FilePath test.txt
+  ```
+
+### Microsoft Links:
+
+- [Microsoft Docs](https://docs.microsoft.com/en-us/windows/wsl/about)
+- [Release Notes](https://docs.microsoft.com/en-us/windows/wsl/release-notes)
+- [WSL Blog](https://blogs.msdn.microsoft.com/wsl) (Historical)
+- [Command Line Blog](https://blogs.msdn.microsoft.com/commandline/) (Active)
+
+### Community Links:
+
+- Stack Overflow: https://stackoverflow.com/questions/tagged/wsl
+- Ask Ubuntu: https://askubuntu.com/questions/tagged/wsl
+- reddit: https://www.reddit.com/r/bashonubuntuonwindows
+- List of programs that work and don't work
+- https://github.com/ethanhs/WSL-Programs
+- https://github.com/davatron5000/can-i-subsystem-it
+- Awesome WSL: https://github.com/sirredbeard/Awesome-WSL
+- Tips and guides for new bash users: https://github.com/abergs/ubuntuonwindows
