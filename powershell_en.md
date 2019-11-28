@@ -1,14 +1,20 @@
+
+awesome-powershell | [Powershell 最佳实践](README.md)
+===================
+
+**This article mainly records some `powershell` usage tips. Through these tips, we can more easily and quickly solve practical problems. It is inevitable that there are currently negligence. Corrections are welcome. At the same time, like-minded partners are welcome to improve together and build `powershell` best practices.**
+
 ### CPU
 
 * Get cpu usage
 
-    ```
+    ```cpu
     Get-WmiObject win32_processor | select LoadPercentage  | fl
     ```
 
 * Obtain the cpu usage rate at the specified interval and save it to the file.
 
-    ```
+    ```cpu_percent
     if (-not (Test-Path "c:\cpu_useage.log")){
     "" > c:\cpu_useage.log
     }
@@ -21,8 +27,10 @@
         Start-Sleep 2
     }
     ```
-* Get process cpu useage
-    ```
+
+* Get process cpu useage by process name
+
+    ```cpu_useage_by_process_name
     function GetCpuUsageByProcessName {
         param (
             [string] $processName
@@ -34,12 +42,27 @@
     }
 
     ```
+* Cpu pressure test
+
+    ```cpu_pressure
+    #可以平均分配到每个 cpu 核心中进行压测
+    $cpu_cores = 4
+    foreach ($loopnumber in 1..$cpu_cores){
+        Start-Job -ScriptBlock{ 
+            foreach ($loopnumber in 1..2147483647) {
+                $result=1;
+                foreach ($number in 1..2147483647) {
+                    $result = $result * $number};$result
+                } 
+            }
+        }
+    ```
 
 ### Memory
 
 * Get memory usage
 
-  ```
+  ```memory_useage
   $ComputerMemory = Get-WmiObject -ComputerName localhost -Class win32_operatingsystem -ErrorAction Stop
   $Memory = ((($ComputerMemory.TotalVisibleMemorySize - $ComputerMemory.FreePhysicalMemory)*100)/ $ComputerMemory.TotalVisibleMemorySize)
   $RoundMemory = [math]::Round($Memory, 2)
@@ -47,7 +70,7 @@
 
 * Obtain the memory usage rate at the specified interval and save it to the file.
   
-  ```
+  ```memory_useage_time_span
   if (-not (Test-Path "c:\memory_useage.log")){
     "" > c:\memory_useage.log
   }
@@ -63,7 +86,8 @@
 ### File System
 
 * Quickly create large file(fsutil)
-  ```
+
+  ```fsutil
   fsutil file createnew 1.log 1073741824
 
   #Some common file sizes to save you from math(File size is in bytes)
@@ -75,7 +99,8 @@
 
 * Quickly create large file(using powershell)
 
-  ```
+  ```create_file
+  #Beyond short integer range will overflow
   $content = "f" * 501MB
   $content | Out-File -FilePath test.txt
   ```
