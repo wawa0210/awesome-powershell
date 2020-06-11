@@ -104,6 +104,15 @@ Powershell 最佳实践 | [awesome-powershell](powershell_en.md)
   $content = "f" * 501MB
   $content | Out-File -FilePath test.txt
   ```
+  
+### 网络
+
+* 测试指定 ip 端口连通性(linux telnet)
+
+  ```
+  Test-NetConnection -Port port -ComputerName server-ip
+  
+  ```
 
 ### 微软官方文档:
 
